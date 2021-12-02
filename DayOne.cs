@@ -6,7 +6,7 @@ namespace aoc2021
 		{
 			Console.WriteLine("Day 1 - Part One");
 
-			int[] depths = ReadFileAsInts("input-d1.txt");;
+			int[] depths = InputReader.ReadFileAsInts("input-d1.txt");;
 
 			int currentDepth = -1;
 			int count = 0;
@@ -28,7 +28,7 @@ namespace aoc2021
 		{
 			Console.WriteLine("Day 1 - Part Two");
 
-			int[] depths = ReadFileAsInts("input-d1.txt");
+			int[] depths = InputReader.ReadFileAsInts("input-d1.txt");
 
 			int currentDepth = -1;
 			int count = 0;
@@ -45,21 +45,6 @@ namespace aoc2021
 			}
 
 			Console.WriteLine("Count: " + count);
-		}
-
-		private int[] ReadFileAsInts(string filename){
-			string inputText = System.IO.File.ReadAllText(filename);
-
-			string[] values = inputText.Trim().Split('\n');
-
-			int[] intValues = new int[values.Length];
-
-			for(int i=0; i< intValues.Length; i++)
-			{
-				intValues[i] = int.Parse(values[i]);
-			}
-
-			return intValues;
 		}
 
 	}
