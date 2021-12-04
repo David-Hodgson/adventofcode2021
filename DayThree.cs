@@ -52,7 +52,87 @@ namespace aoc2021
 			Console.WriteLine("Day 3 - Part Two");
 
 			string[] commands = InputReader.ReadFileAsStrings("input-d3.txt");
+
+			string oxygenValue = Filter(new List<string>(commands),0, true, '1');
+			string co2Value = Filter(new List<string>(commands),0, false, '0');
+
+			int lifeSupport = BinaryStringToInt(oxygenValue) * BinaryStringToInt(co2Value);
+
+			Console.WriteLine("Life Support: " + lifeSupport);
 			
+		}
+
+		private string Filter(List<string> inputList, int pos, bool mostCommon, char defaultChar)
+		{
+
+			List<string> filteredList = new List<string>();
+
+			int oneCount =-0;
+			int naughtCount = 0;
+			foreach(string input in inputList)
+			{
+				if (input[pos] == '0')
+				{
+					naughtCount++;
+				}
+				else
+				{
+					oneCount++;
+				}
+			}
+
+			char filterChar = 'x';
+			if (mostCommon)
+			{
+				if (oneCount > naughtCount)
+				{
+					filterChar = '1';
+				}
+
+				if (naughtCount > oneCount)
+				{
+					filterChar = '0';
+				}
+
+				if (naughtCount == oneCount)
+				{
+					filterChar = defaultChar;
+				}
+			}
+			else
+			{
+				if (oneCount < naughtCount)
+				{
+					filterChar = '1';
+				}
+
+				if (naughtCount < oneCount)
+				{
+					filterChar = '0';
+				}
+
+				if (naughtCount == oneCount)
+				{
+					filterChar = defaultChar;
+				}
+			}
+
+			foreach(string input in inputList)
+			{
+				if (input[pos] == filterChar)
+				{
+					filteredList.Add(input);
+				}
+			}
+
+			if (filteredList.Count() == 1)
+			{
+				return filteredList[0];
+			}
+			else
+			{
+				return Filter(filteredList,pos+1,mostCommon,defaultChar);
+			}
 		}
 
 		private int BinaryStringToInt(string input)
