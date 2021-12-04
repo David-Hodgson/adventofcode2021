@@ -43,7 +43,7 @@ namespace aoc2021
 
 		public void PartTwo()
 		{
-			Console.WriteLine("Day 1 - Part Two");
+			Console.WriteLine("Day 2 - Part Two");
 
 			string[] commands = InputReader.ReadFileAsStrings("input-d2.txt");
 
