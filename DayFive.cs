@@ -80,6 +80,42 @@ namespace aoc2021
 
 			string[] input = InputReader.ReadFileAsStrings("input-d5.txt");
 
+
+ 			List<Line> lines = new List<Line>();
+
+			foreach(string lineinput in input)
+			{
+				lines.Add(parseLine(lineinput));
+			}
+
+
+			int gridSize = 1000;
+			int[][] grid = new int[gridSize][];
+
+			for(int i=0;i<grid.Length;i++)
+			{
+				grid[i] = new int[gridSize];
+			}
+
+			plotLines(grid,lines);
+
+
+			
+			int intersecCount = 0;
+			for (int i=0;i<grid.Length;i++)
+			{
+				for (int j=0;j<grid[i].Length;j++)
+				{
+					if (grid[i][j] >1){
+						intersecCount++;
+					}
+					//Console.Write(grid[i][j]);
+				}
+				//Console.Write("\n");
+			}
+
+			Console.WriteLine("Total: " + intersecCount);
+
 		}
 
 		private Line parseLine(string lineInput)
@@ -150,6 +186,47 @@ namespace aoc2021
 				}
 				else
 				{
+
+					string startStr = "" + l.Start.X + "," + l.Start.Y;
+					string endStr = "" + l.End.X + "," + l.End.Y;
+
+					//Console.WriteLine("Plotting line " + startStr + " -> " + endStr);
+					Point start;
+					Point end;
+
+					if (l.Start.X < l.End.X)
+					{
+						start = l.Start;
+						end = l.End;
+					}
+					else
+					{
+						start = l.End;
+						end = l.Start;
+					}
+
+					if (start.Y < end.Y)
+					{
+						//up
+						int x = start.X;
+						for(int i=start.Y; i<=end.Y;i++)
+						{
+							//Console.WriteLine("\tPlotting " + x + "," + i);
+							grid[x][i]++;
+							x++;
+						}
+					}
+					else
+					{
+						//down
+						int x = start.X;
+						for(int i=start.Y; i>=end.Y; i--){
+							//Console.WriteLine("\tPlotting " + x + "," + i);
+							grid[x][i]++;
+							x++;
+						}
+					}
+
 				}
 			}
 		}
