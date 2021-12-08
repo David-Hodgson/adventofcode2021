@@ -62,6 +62,11 @@ namespace aoc2021
 					}
 
 				}
+
+				if (hasWon)
+				{
+					break;
+				}
 			}	
 
 			int total = lowestScore * lastNumber;
@@ -129,6 +134,11 @@ namespace aoc2021
 						break;
 					}
 
+				}
+
+				if (hasWon)
+				{
+					break;
 				}
 			}	
 
