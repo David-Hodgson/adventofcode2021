@@ -28,16 +28,11 @@ namespace aoc2021
 
 	    DaySix d6 = new DaySix();
 	    d6.PartOne();
+	    d6.PartTwo();
 
-	    try
-	    {
-	    	d6.PartTwo();
-	    }
-	    catch(Exception e)
-	    {
-		    Console.WriteLine("Error: " + e.Message);
-		    Console.WriteLine(e.StackTrace);
-	    }
+	    DaySeven d7 = new DaySeven();
+	    d7.PartOne();
+	    d7.PartTwo();
         }
     }
 
