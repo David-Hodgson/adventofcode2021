@@ -2,6 +2,16 @@ namespace aoc2021
 {
 	public class InputReader{
 
+
+		public static string ReadFileAsString(string filename)
+		{
+			
+			string inputText = System.IO.File.ReadAllText(filename);
+
+
+			return inputText;
+		}
+
 		public static string[] ReadFileAsStrings(string filename)
 		{
 			

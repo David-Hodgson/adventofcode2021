@@ -25,6 +25,10 @@ namespace aoc2021
 	    DayFive d5 = new DayFive();
 	    d5.PartOne();
 	    d5.PartTwo();
+
+	    DaySix d6 = new DaySix();
+	    d6.PartOne();
+	    d6.PartTwo();
         }
     }
 
