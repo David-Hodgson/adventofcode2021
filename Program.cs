@@ -41,6 +41,10 @@ namespace aoc2021
 	    DayNine d9 = new DayNine();
 	    d9.PartOne();
 	    d9.PartTwo();
+
+	    DayTen d10 = new DayTen();
+	    d10.PartOne();
+	    d10.PartTwo();
         }
     }
 
