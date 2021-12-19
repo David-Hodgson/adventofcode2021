@@ -13,12 +13,20 @@ namespace aoc2021
 			{'<','>'}
 		};
 
-		private static Dictionary<char,int> scores = new Dictionary<char,int>()
+		private static Dictionary<char,int> corruptScores = new Dictionary<char,int>()
 		{
 			{')', 3},
 			{']', 57},
 			{'}', 1197},
 			{'>', 25137}
+		};
+
+		private static Dictionary<char,int> completeScores = new Dictionary<char,int>()
+		{
+			{')', 1},
+			{']', 2},
+			{'}', 3},
+			{'>', 4}
 		};
 
 		public void PartOne()
@@ -31,10 +39,9 @@ namespace aoc2021
 			foreach(string chunk in chunks)
 			{
 				Tuple<bool,char> result = verifyChunk(chunk);
-				//Console.WriteLine("Line is valid: " + result.Item1);
 				if (!result.Item1)
 				{
-					score = score + scores[result.Item2];
+					score = score + corruptScores[result.Item2];
 				}
 			}
 
@@ -45,7 +52,25 @@ namespace aoc2021
 		{
 			Console.WriteLine("Day 10 - Part Two");
 
-			string[] depths = InputReader.ReadFileAsStrings("input-d10.txt");
+
+			string[] chunks = InputReader.ReadFileAsStrings("input-d10.txt");
+
+			List<long> scores = new List<long>();
+			
+			foreach(string chunk in chunks)
+			{
+				Tuple<bool,char> result = verifyChunk(chunk);
+				if (result.Item1)
+				{
+					string extra = completeChunk(chunk);
+					long chunkScore = calculateCompleteScore(extra);
+					scores.Add(chunkScore);
+				}
+			}
+
+			scores.Sort();
+			int midPoint = scores.Count /2 ;
+			Console.WriteLine("Score: " + scores[midPoint]);
 		}
 
 		private Tuple<bool,char> verifyChunk(string chunk)
@@ -57,7 +82,6 @@ namespace aoc2021
 
 			for(int i=0; i< chunk.Length; i++)
 			{
-				//Console.WriteLine(chunk[i]);
 
 				if (starts.Contains(chunk[i]))
 				{
@@ -79,6 +103,46 @@ namespace aoc2021
 				}
 			}
 			return new Tuple<bool,char>(valid,lastChar);
+		}
+
+		private string completeChunk(string chunk)
+		{
+			string extra = "";
+			Stack<char> parseStack = new Stack<char>();
+			
+			for (int i=0; i < chunk.Length; i++)
+			{
+				if (starts.Contains(chunk[i]))
+				{
+					parseStack.Push(chunk[i]);
+				}
+				else if (ends.Contains(chunk[i]))
+				{
+					parseStack.Pop();
+				}
+			}
+
+			int stackSize = parseStack.Count;
+			for (int j=0; j < stackSize; j++)
+			{
+				char starter = parseStack.Pop();
+				extra = extra + matches[starter];
+			}
+
+			return extra;
+		}
+
+		private long calculateCompleteScore(string completionString)
+		{
+			long score = 0;
+
+			for (int i=0; i < completionString.Length; i++)
+			{
+				score = score * 5;
+				score = score + completeScores[completionString[i]];
+			}
+
+			return score;
 		}
 
 	}
