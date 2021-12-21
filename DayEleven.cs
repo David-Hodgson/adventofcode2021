@@ -34,7 +34,28 @@ namespace aoc2021
 		{
 			Console.WriteLine("Day 11 - Part Two");
 
-			int[] depths = InputReader.ReadFileAsInts("input-d1.txt");
+			string[] input = InputReader.ReadFileAsStrings("input-d11.txt");
+
+			int[][] grid = parseGrid(input);
+
+			int currentStep = 0;
+			int flashCount = 0;
+
+			while(flashCount != 100)
+			{
+				currentStep++;
+				//Update Energy
+				updateEnergy(grid);
+				//Process Flashes
+				processEnergy(grid);
+				//Count Flasshes
+				flashCount = countFlashes(grid);
+				//Reset
+				resetEnergy(grid);
+			}
+
+			Console.WriteLine("All Flash at step: " + currentStep);
+
 
 		}
 
