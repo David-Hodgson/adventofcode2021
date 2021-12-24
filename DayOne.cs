@@ -6,7 +6,7 @@ namespace aoc2021
 		{
 			Console.WriteLine("Day 1 - Part One");
 
-			int[] depths = InputReader.ReadFileAsInts("input-d1.txt");;
+			int[] depths = InputReader.ReadFileAsInts("input-d1.txt");
 
 			int currentDepth = -1;
 			int count = 0;
