@@ -35,6 +35,19 @@ namespace aoc2021
 		public void PartTwo()
 		{
 			Console.WriteLine("Day 15 - Part Two");
+
+			distanceMap.Clear();
+			string[] input = InputReader.ReadFileAsStrings("input-d15.txt");
+
+			int[][] smallmaze = parseMaze(input);
+
+			int[][] maze = extendMaze(smallmaze);
+
+			generateDistanceMap(maze, 0,0,0);
+			string maxKey = "" + (maze.Length-1) + "," + (maze[maze.Length-1].Length-1);
+			Console.WriteLine("Min Length: " + distanceMap[maxKey]);
+
+
 		}
 
 		private Dictionary<string,int> distanceMap = new Dictionary<string,int>();
@@ -131,6 +144,45 @@ namespace aoc2021
 				}
 			}
 
+			return maze;
+		}
+
+		public int[][] extendMaze(int[][] sourceMaze)
+		{
+			int[][] maze = new int[sourceMaze.Length * 5][];
+
+			for(int i=0;i<maze.Length;i++)
+			{
+				maze[i] = new int[maze.Length];
+			}
+
+			for(int i=0;i<5;i++)
+			{
+				for(int j=0;j<5;j++)
+				{
+					for(int x=0;x<sourceMaze.Length;x++){
+						for(int y=0;y<sourceMaze[x].Length;y++){
+							int newValue = sourceMaze[x][y] + i + j;
+							newValue = newValue % 9;
+							if (newValue==0)
+								newValue=9;
+
+							maze[x+(i*sourceMaze.Length)][y+(j*sourceMaze.Length)] = newValue;
+						}
+					}
+				}
+			}
+
+			/*
+			for(int i=0;i<maze.Length;i++)
+			{
+				for (int j=0;j<maze[i].Length;j++)
+				{
+					Console.Write(maze[i][j]);
+				}
+				Console.Write("\n");
+			}
+			*/
 			return maze;
 		}
 	}
