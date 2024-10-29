@@ -5,7 +5,7 @@ namespace aoc2021
         static void Main(string[] args)
         {
             System.Console.WriteLine("Advent of Code 2021!");
-
+/*
 	    DayOne d1 = new DayOne();
 	    d1.PartOne();
 	    d1.PartTwo();
@@ -65,11 +65,11 @@ namespace aoc2021
 	    DayFifteen d15 = new DayFifteen();
 	    d15.Test();
 	    d15.PartOne();
-	    d15.PartTwo();
-
-	    //DaySixteen d16 = new DaySixteen();
-	    //d16.PartOne();
-	    //d16.PartTwo();
+	    //d15.PartTwo();
+*/
+	    DaySixteen d16 = new DaySixteen();
+	    d16.PartOne();
+	    d16.PartTwo();
         }
     }
 
